@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Happy 22nd Birthday Yayie!</title>
+  <style>
+    @font-face {
+      font-family: 'SpiderFont';
+      src: url('{{ url_for("static", filename="spiderman_font.ttf") }}');
+    }
+
+    body {
+      margin: 0;
+      background: radial-gradient(circle, #0a0a0a 60%, #c00000 100%);
+      color: white;
+      text-align: center;
+      font-family: 'SpiderFont', sans-serif;
+      overflow-x: hidden;
+      overflow-y: auto;
+      padding: 0 10px;
+    }
+
+    /* Intro overlay */
+    #intro {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      transition: opacity 2s ease;
+    }
+
+    #intro iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Main content */
+    #main-content {
+      opacity: 0;
+      transition: opacity 2s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 2.2em; /* slightly smaller for mobile */
+      font-family: 'SpiderFont', sans-serif;
+      color: white;
+      text-shadow:
+        2px 2px 0 #ff0000,
+        -2px -2px 0 #1c75ff,
+        2px -2px 0 #1c75ff,
+        -2px 2px 0 #ff0000,
+        4px 4px 0 #ff0000,
+        -4px -4px 0 #1c75ff,
+        0 0 10px #000;
+      background: linear-gradient(90deg, #ff1c1c, #1c75ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 20px 0;
+    }
+
+    p {
+      font-size: 1em; /* smaller for mobile */
+      margin: 10px 0 20px 0;
+    }
+
+    img {
+      width: 90%;
+      max-width: 300px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px #ff0000;
+      margin: 10px auto;
+      display: block;
+    }
+
+    button {
+      background: #ff0000;
+      border: none;
+      padding: 12px 20px;
+      font-size: 1em;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+      margin: 15px auto;
+      display: block;
+      box-shadow: 0 0 15px #000;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      background: #c00000;
+    }
+
+    .web {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://www.transparenttextures.com/patterns/dark-mosaic.png');
+      opacity: 0.2;
+      pointer-events: none;
+    }
+
+    @media only screen and (max-width: 414px) {
+      h1 { font-size: 2em; }
+      p { font-size: 0.95em; }
+      button { font-size: 0.95em; padding: 10px 18px; }
+      img { max-width: 280px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="web"></div>
+
+  <div id="intro">
+    <iframe src="https://gifer.com/embed/6bit" frameborder="0" allowfullscreen></iframe>
+  </div>
+
+  <div id="main-content">
+    <h1>🕸️ Happy 22nd Birthday Yayie! 🕸️</h1>
+    <img src="{{ url_for('static', filename='yayie.jpg') }}" alt="Birthday Girl" />
+    <p>May happiness and joy be with you all the time.<br>Love you 3000!</p>
+    <button onclick="playSong()">Play Song</button>
+    <audio id="song" src="{{ url_for('static', filename='spiderman_theme.mp3') }}" preload="auto"></audio>
+  </div>
+
+  <script>
+    window.onload = () => {
+      const intro = document.getElementById('intro');
+      const content = document.getElementById('main-content');
+
+      setTimeout(() => {
+        intro.style.opacity = 0;
+        setTimeout(() => {
+          intro.style.display = 'none';
+          content.style.opacity = 1;
+        }, 2000);
+      }, 5000);
+    };
+
+    function playSong() {
+      const song = document.getElementById('song');
+      song.play().catch((error) => {
+        console.log("Audio play blocked:", error);
+        alert("Click the button again if the song doesn’t start automatically.");
+      });
+    }
+  </script>
+</body>
+</html>
